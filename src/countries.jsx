@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import React from "react";
+import axios from "axios"
 
 const CountryCard =({name ,flagImg ,flagAltTxt})=>{
     return (
@@ -27,21 +28,27 @@ function Countries() {
    const API_URL = "https://restcountries.com/v3.1/all"
    const [countries ,setcountries] = useState([])
 
-//    useEffect (()=> {
-//         try{
 
-//         }catch(err){
+    const fetchData = async () => {
+        try {
+            const response = await axios.get(API_URL);
+            return response.data
+        } catch (e) {
+            console.log(e)
+        }
+    }
 
-//         }
-//    }, [])
+    useEffect (()=> {
+        fetchData().then((data)=>setcountries(data))
+    }, [])
 
-
-//Promise chaning 
-useEffect (()=>{
-    fetch(API_URL).then(res => res.json())
-    .then((data)=> setcountries(data))
-    .catch((error)=> console.error("Error:" , error))
-},[])
+    
+// //Promise chaning 
+// useEffect (()=>{
+//     fetch(API_URL).then(res => res.json())
+//     .then((data)=> setcountries(data))
+//     .catch((error)=> console.error("Error:" , error))
+// },[])
 
    return (
     <div style={{
