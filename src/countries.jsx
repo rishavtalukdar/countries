@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import React from "react";
 
-const countryCard =({name ,flagImg ,flagAltTxt})=>{
+const CountryCard =({name ,flagImg ,flagAltTxt})=>{
     return (
         <div style={{
             display: "flex",
@@ -15,8 +15,8 @@ const countryCard =({name ,flagImg ,flagAltTxt})=>{
             width: "200px",
             height: "200px",
         }}>
-            <img src="flagImg" alt="flagAltTxt"  style={{width: "100px", height: "100px"}}/>
-            <h2>name</h2>
+            <img src={flagImg} alt={flagAltTxt}  style={{width: "100px", height: "100px"}}/>
+            <h2>{name}</h2>
         </div>
     )
 }
@@ -43,8 +43,6 @@ useEffect (()=>{
     .catch((error)=> console.error("Error:" , error))
 },[])
 
-
-console.log("countries",countries)
    return (
     <div style={{
         display :"flex",
@@ -53,9 +51,8 @@ console.log("countries",countries)
         justifyContent: "center",
         height :"100vh"
     }}>
-       
         {countries.map((country)=>(
-            countryCard (name="countries.name.common", flagImg="flags.png" , flagAltTxt="flags.alt")
+            <CountryCard name= {country.name.common} flagImg={ country.flags.png} flagAltTxt={country.flags.alt} />
         ))}
     </div>
    )
